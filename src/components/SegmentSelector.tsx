@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BUSINESS_SEGMENTS } from '../data/priceData';
-import { AlertCircle, ArrowRight, CheckCircle2, ChevronRight, HelpCircle } from 'lucide-react';
+import { AlertCircle, ArrowRight, CheckCircle2, ChevronRight, Sparkles } from 'lucide-react';
 
 interface SegmentSelectorProps {
   onSelectServiceOrPackage: (serviceIdOrPackageId: string) => void;
@@ -23,72 +23,73 @@ export const SegmentSelector: React.FC<SegmentSelectorProps> = ({
   ];
 
   return (
-    <section id="stages" className="py-20 bg-slate-900/40 border-b border-slate-800/80">
+    <section id="stages" className="py-20 bg-slate-50/60 border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-2">
-            Ступени бизнеса
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700 bg-amber-100/80 px-2.5 py-1 rounded-full uppercase tracking-wider mb-2.5">
+            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            <span>Ступени зрелости бизнеса</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
             Для кого мы работаем
           </h2>
-          <p className="text-slate-300 text-base leading-relaxed">
-            На каждой ступени продажи теряют деньги по-разному. Поэтому мы не продаём одно и то же решение всем подряд, а точно подбираем шаг под вашу ступень развития.
+          <p className="text-slate-600 text-base leading-relaxed">
+            На каждой ступени отдел продаж теряет деньги по-разному. Мы не продаём одно универсальное решение всем подряд, а подбираем точный шаг под текущий этап развития вашей компании.
           </p>
         </div>
 
         {/* 4 Interactive Segment Tabs */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 p-1.5 bg-slate-950/80 rounded-xl border border-slate-800 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 p-1.5 bg-slate-200/70 rounded-2xl mb-8">
           {BUSINESS_SEGMENTS.map((seg) => {
             const isActive = seg.id === activeSegmentId;
             return (
               <button
                 key={seg.id}
                 onClick={() => setActiveSegmentId(seg.id)}
-                className={`flex flex-col text-left p-3.5 sm:p-4 rounded-lg transition-all cursor-pointer ${
+                className={`flex flex-col text-left p-3.5 sm:p-4 rounded-xl transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-slate-800 text-white shadow-md border border-slate-700'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60 border border-transparent'
+                    ? 'bg-white text-slate-900 shadow-sm border border-slate-200/80'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/50 border border-transparent'
                 }`}
               >
                 <div className="flex items-center justify-between w-full mb-1">
-                  <span className="font-mono text-xs font-bold text-amber-400">0{seg.id}</span>
-                  {isActive && <span className="w-1.5 h-1.5 bg-amber-400 rounded-full" />}
+                  <span className="font-mono text-xs font-bold text-amber-700">0{seg.id}</span>
+                  {isActive && <span className="w-2 h-2 bg-amber-500 rounded-full" />}
                 </div>
-                <div className="text-sm sm:text-base font-bold text-white line-clamp-1">{seg.title}</div>
-                <div className="text-xs text-slate-400 mt-1 line-clamp-1">{seg.badge}</div>
+                <div className="text-sm sm:text-base font-extrabold text-slate-900 line-clamp-1">{seg.title}</div>
+                <div className="text-xs text-slate-500 mt-0.5 line-clamp-1 font-medium">{seg.badge}</div>
               </button>
             );
           })}
         </div>
 
         {/* Detailed Segment View Card */}
-        <div className="bg-slate-950/70 border border-slate-800 rounded-2xl p-6 sm:p-8 mb-12">
-          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-slate-800">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm mb-12">
+          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-slate-100">
             <div>
-              <div className="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1">
+              <div className="text-xs font-bold text-amber-700 uppercase tracking-wider mb-1">
                 Ступень {currentSegment.id}
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">
+              <h3 className="text-2xl font-extrabold text-slate-900 mb-2">
                 {currentSegment.title}
               </h3>
-              <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
                 {currentSegment.audience}
               </p>
             </div>
 
-            <div className="shrink-0 bg-slate-900 border border-slate-800 p-4 rounded-xl lg:max-w-xs">
-              <div className="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">
+            <div className="shrink-0 bg-slate-50 border border-slate-200 p-4 rounded-xl lg:max-w-xs">
+              <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">
                 Рекомендуемый старт:
               </div>
-              <div className="text-sm font-bold text-white mb-3">
+              <div className="text-sm font-bold text-slate-900 mb-3">
                 {currentSegment.recommendedStartingPoint}
               </div>
               <button
                 onClick={onOpenBooking}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors cursor-pointer"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-all shadow-2xs active:scale-[0.99] cursor-pointer"
               >
                 <span>Обсудить на разборе</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -99,14 +100,14 @@ export const SegmentSelector: React.FC<SegmentSelectorProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
             {/* Pains / Losses */}
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold text-rose-400 uppercase tracking-wider mb-3">
-                <AlertCircle className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-xs font-bold text-rose-700 uppercase tracking-wider mb-3">
+                <AlertCircle className="w-4 h-4 text-rose-600" />
                 <span>Где вы теряете продажи и деньги</span>
               </div>
               <ul className="space-y-2.5">
                 {currentSegment.pains.map((pain, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-300">
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400/80 mt-2 shrink-0" />
+                  <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-700">
+                    <span className="w-2 h-2 rounded-full bg-rose-500 mt-1.5 shrink-0" />
                     <span>{pain}</span>
                   </li>
                 ))}
@@ -116,29 +117,32 @@ export const SegmentSelector: React.FC<SegmentSelectorProps> = ({
             {/* How We Help & What you get */}
             <div className="space-y-6">
               <div>
-                <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">
-                  <CheckCircle2 className="w-4 h-4" />
+                <div className="flex items-center gap-2 text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">
+                  <CheckCircle2 className="w-4 h-4 text-amber-600" />
                   <span>Чем поможем</span>
                 </div>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm text-slate-700 leading-relaxed">
                   {currentSegment.howWeHelp}
                 </p>
               </div>
 
               <div>
-                <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">
+                <div className="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2">
                   Что вы получите в итоге
                 </div>
-                <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800/80 text-sm font-medium text-emerald-300">
+                <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-sm font-semibold text-emerald-950">
                   {currentSegment.whatYouGet}
                 </div>
               </div>
 
               <div>
-                <div className="text-xs text-slate-400 mb-2">Ключевые услуги для этой ступени:</div>
+                <div className="text-xs font-medium text-slate-500 mb-2">Ключевые услуги для этой ступени:</div>
                 <div className="flex flex-wrap gap-2 text-xs">
                   {currentSegment.servicesIncluded.map((s, idx) => (
-                    <span key={idx} className="text-slate-300 bg-slate-900 px-2.5 py-1 rounded border border-slate-800">
+                    <span
+                      key={idx}
+                      className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 border border-slate-200 font-medium"
+                    >
                       {s}
                     </span>
                   ))}
@@ -148,43 +152,28 @@ export const SegmentSelector: React.FC<SegmentSelectorProps> = ({
           </div>
         </div>
 
-        {/* Quick Decider Navigator (Table from PDF Page 3) */}
-        <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8">
-          <div className="flex items-center gap-2 text-xs font-semibold text-amber-400 uppercase tracking-wider mb-2">
-            <HelpCircle className="w-4 h-4" />
-            <span>Навигатор: как понять, с чего начать</span>
-          </div>
-          <h3 className="text-xl font-bold text-white mb-6">
-            Выберите вашу текущую ситуацию:
-          </h3>
-
-          <div className="grid grid-cols-1 divide-y divide-slate-800/80">
+        {/* Quick Decider Table */}
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+          <h4 className="text-lg font-bold text-slate-900 mb-4">
+            Не уверены, с чего начать? Экспресс-навигатор:
+          </h4>
+          <div className="divide-y divide-slate-100 text-xs sm:text-sm">
             {quickDecider.map((row, idx) => (
-              <div 
-                key={idx} 
-                className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-900/50 px-2 rounded-lg transition-colors"
-              >
-                <div className="text-sm sm:text-base font-medium text-slate-200">
-                  {row.situation}
-                </div>
-                <div className="flex items-center gap-3 shrink-0">
-                  <span className="text-xs font-bold text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded border border-amber-400/20">
-                    {row.solution}
-                  </span>
-                  <button
-                    onClick={() => {
-                      if (row.type === 'modal') {
-                        onOpenBooking();
-                      } else {
-                        onSelectServiceOrPackage(row.target);
-                      }
-                    }}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
-                  >
-                    <span>Перейти</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
-                  </button>
-                </div>
+              <div key={idx} className="py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="text-slate-700 font-medium">{row.situation}</div>
+                <button
+                  onClick={() => {
+                    if (row.type === 'modal') {
+                      onOpenBooking();
+                    } else {
+                      onSelectServiceOrPackage(row.target);
+                    }
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 font-bold text-xs text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors cursor-pointer shrink-0"
+                >
+                  <span>{row.solution}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
               </div>
             ))}
           </div>

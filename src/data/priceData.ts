@@ -9,6 +9,7 @@ export interface ServiceItem {
   result: string;
   basePrice: number;
   priceDisplay: string;
+  priceNote?: string;
   isMonthly?: boolean;
   isRange?: boolean;
   hasVariants?: boolean;
@@ -87,7 +88,8 @@ export const SERVICES: ServiceItem[] = [
     description: 'Наводим порядок в картине продаж. Не лезем в рекламу и логистику, а разбираем, что происходит с клиентом после обращения. Находим главное узкое место, через которое уходят продажи.',
     result: 'Конкретный список шагов и понимание, с чего начать рост именно вам.',
     basePrice: 0,
-    priceDisplay: 'Донат (первая встреча: по вашему решению, не подошли — бесплатно; после пилота 5 000 ₽)'
+    priceDisplay: 'Донат',
+    priceNote: 'первая встреча: по вашему решению (не подошли — 0 ₽, после пилота — 5 000 ₽)'
   },
   {
     id: '02',

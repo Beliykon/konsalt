@@ -22,11 +22,11 @@ import { FoundersSection } from './components/FoundersSection';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { MarqueeTicker } from './components/MarqueeTicker';
-import { LiveActivityToasts } from './components/LiveActivityToasts';
-import { LiveLossCounter } from './components/LiveLossCounter';
 import { ConfettiEffect } from './components/ConfettiEffect';
 import { BookingModal } from './components/BookingModal';
 import { FloatingTelegramBar } from './components/FloatingTelegramBar';
+import { ReadingProgressBar } from './components/ReadingProgressBar';
+import { MascotCompanion } from './components/MascotCompanion';
 import { TurnkeyPackage } from './data/priceData';
 
 export default function App() {
@@ -100,10 +100,16 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-amber-300 selection:text-slate-950">
       
-      {/* 3-Zone Top Bar */}
-      <Header onOpenBooking={handleOpenGeneralBooking} />
+      {/* Scroll Reading Progress Bar at the very top */}
+      <ReadingProgressBar />
+
+      {/* 3-Zone Top Bar with Interactive Mega-Menu */}
+      <Header 
+        onOpenBooking={handleOpenGeneralBooking} 
+        onSelectPackage={handleSelectPackageInCalculator}
+      />
 
       {/* Main Content Area */}
       <main className="flex-1">
@@ -193,14 +199,15 @@ export default function App() {
       {/* Footer */}
       <Footer onOpenBooking={handleOpenGeneralBooking} />
 
-      {/* Live Social Proof Activity Toasts (bottom left) */}
-      <LiveActivityToasts />
-
-      {/* Real-time Ticking Loss Counter (bottom left) */}
-      <LiveLossCounter onOpenBooking={handleOpenGeneralBooking} />
-
       {/* Floating Telegram Quick Contact Widget (bottom right) */}
       <FloatingTelegramBar onOpenBooking={handleOpenGeneralBooking} />
+
+      {/* Animated Mascot Companion "РОПик" (bottom left) */}
+      <MascotCompanion 
+        onOpenBooking={handleOpenGeneralBooking}
+        onScrollToCalculator={handleScrollToCalculator}
+        onSelectPackage={handleSelectPackageInCalculator}
+      />
 
       {/* Canvas Physics Confetti Blast */}
       <ConfettiEffect active={showConfetti} onComplete={() => setShowConfetti(false)} />
